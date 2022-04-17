@@ -55,8 +55,8 @@ class Simulator {
                 std::string line;
 
                 // Read data in from file and put into string 
-                while (std::getline()) {
-                    std::cout << line << endl;
+                while (std::getline(filestream, line)) {
+                    std::cout << line << std::endl;
                 }
 
             }
