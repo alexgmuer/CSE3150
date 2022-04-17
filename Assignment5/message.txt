@@ -1,0 +1,137 @@
+#include "Template.H"
+#include <iostream>
+#include <fstream>
+#include <utility>
+#include <stdlib.h>
+#include <ctime>
+#include <vector>
+#include "Replacement.H"
+
+using namespace std;
+
+LetterGenerator::LetterGenerator(const char* fName, const vector<string>& fields){
+
+  ifstream is(fName);
+
+  is.seekg(0,ios_base::end);
+  size_t sz = is.tellg();
+  is.seekg(0, ios_base::beg);
+
+  _buf = new char[sz+1]; //allocate buffer (+1 for null terminator)
+
+  is.read(_buf,sz);
+
+  _operators["today"] = makeFun([](const Recipient& r, const auto& args){
+    int nbDays = stoi(args[0]);
+    time_t now = time(NULL);
+    struct tm* tm = localtime(&now);
+    tm->tm_mday += nbDays;
+    time_t later = mktime(tm);
+    struct tm* then = localtime(&later);
+    char buffer[80];
+    strftime(buffer, sizeof(buffer), "%d-%m-%Y", then);
+    string str(buffer);
+    return str;
+  });
+  _operators["date"] = makeFun([](const Recipient& r, const auto& args){
+    return r.getField(args[0]);
+  });
+  _operators["bold"] = makeFun([](const Recipient& r, const auto& args){
+    return string("**") + r.getField(args[0]) + string("**");
+  });
+  _operators["usd"] = makeFun([](const Recipient& r, const auto& args){
+    return string("$") + r.getField(args[0]);
+  });
+  _operators["scale"] = makeFun([](const Recipient& r, const auto& args){
+    auto fieldValue = stod(r.getField(args[0]));
+    auto percent = stod(args[1]);
+    return string("$") + to_string(fieldValue * percent);
+  });
+  for(const auto& field : fields)
+    _operators[field] = makeField(field);
+
+}
+
+void LetterGenerator::mailMerge(DB& db) {
+        int i = 0;
+        string fileType = ".txt";
+        string fileName = "letter_";
+        for (auto it = db.begin(); it != db.end(); ++it) {
+                string outName = fileName + to_string(i) + fileType;    // makes the name of the file. (letter_0, letter_1, ect.)
+                std::ofstream outfile (outName);
+                i++;
+                processLetter(outfile, *it);
+        }
+}
+
+
+void LetterGenerator::processLetter(std::ostream& out,const Recipient& db) {
+        // TODO
+
+        char* c = _buf;
+
+        while((*c != EOF) && (*c != '\0')) {
+
+                if (*c == '$') {
+                        // Do replacement
+                        std::vector<string> params;
+                        string temp;
+                        c++;
+                        int getParam = 1;
+                        while (getParam) {
+
+                                if ((*c == ' ') || (*c == ',')) {
+                                        getParam = 0;
+                                        params.push_back(temp);
+                                        //cout << db.getField(temp) << endl;
+                                        out << db.getField(temp);
+                                        break;
+                                }
+
+                                else if (*c == '(') {
+                                        string args;
+                                        int getArgs = 1;
+                                        c++;
+                                        while (getArgs) {
+
+                                                if (*c == ',') {
+                                                        params.push_back(args);
+                                                        args.clear();
+                                                        c++;
+                                                }
+
+                                                else if (*c == ')') {
+                                                        params.push_back(args);
+                                                        getArgs = 0;
+                                                        c++;
+                                                        break;
+                                                }
+
+                                                else {
+                                                        args += *c;
+                                                        c++;
+                                                }
+                                        }
+										auto t = _operators[temp];
+                                        out << (*t) (db, params);
+                                        //cout << (*t) (db, params) << endl;
+                                        getParam = 0;
+                                        break;
+                                }
+                                else {
+                                        temp += *c;
+                                        c++;
+                                }
+                        }
+                        //cout << db.getField("salutation");
+
+                }
+
+                else {
+                        // Default Send character to output file
+                        out << *c;
+                        c++;
+                }
+        }
+        out << '\0';
+}
