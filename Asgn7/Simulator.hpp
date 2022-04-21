@@ -8,7 +8,54 @@
 // Define data structure inside each node as a class
 // Data structure needs to contain the type 
 
+class Component {
+    public:
 
+    private:
+
+    public:
+
+};
+
+class Buffer : public Component
+{
+    public:
+
+    private:
+
+    public:
+
+};
+
+class Generator : public Component
+{
+    public:
+
+    private:
+
+    public:
+
+};
+
+class Server : public Component
+{
+    public:
+
+    private:
+
+    public:
+
+};
+
+class Router : public Component
+{
+    public:
+
+    private:
+
+    public:
+
+};
 
 //template <class T>
 class Simulator {
@@ -32,11 +79,11 @@ class Simulator {
             // Store whether node is generator, buffer, server, dispatcher
             // Store the next node it is connected to
         };
-        
-    private:
-        // Node and connection maps
+        // Node and connection maps TEMPORARILY PUBLIC
         std::map<std::string, std::string> node_lines;
         std::map<std::string, std::string> connection_lines;
+        
+    private:
 
 
     public:
@@ -127,18 +174,17 @@ class Simulator {
 
         }
 
-        void print(void) {
-            
-            for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
-                std::cout << "Node: " << it->first << "\tFunction: " << it->second << std::endl;
-            }
-            
-            for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
-                std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
-            }
-
-
-        }
-
-    
 };
+
+std::ostream& operator<<(std::ostream& os, const Simulator* s) {
+        
+    for (auto it = s->node_lines.cbegin(); it != s->node_lines.cend(); ++it) {
+        std::cout << "Node: " << it->first << "\tFunction: " << it->second << std::endl;
+    }
+    
+    for (auto it = s->connection_lines.cbegin(); it != s->connection_lines.cend(); ++it) {
+        std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
+    }
+
+    return os;
+}
