@@ -34,7 +34,10 @@ class Simulator {
         };
         
     private:
-        // Something here
+        // Node and connection maps
+        std::map<std::string, std::string> node_lines;
+        std::map<std::string, std::string> connection_lines;
+
 
     public:
         // Constructor
@@ -78,8 +81,6 @@ class Simulator {
                 size_t equal_found = file_lines[i].find(equal_delim);
                 size_t arrow_found = file_lines[i].find(arrow_delim);
                 
-                std::map<std::string, std::string> node_lines;
-                std::map<std::string, std::string> connection_lines;
                 // If equal substring is in line
                 if (equal_found != std::string::npos) {
                     // Temp buffer to hold tokenized parts of line
@@ -121,16 +122,21 @@ class Simulator {
                     
                     connection_lines[temp_buf[0]] = temp_buf[1];
                 }
-
-                for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
-                    std::cout << "Node: " << it->first << "\tFunction:" << it->second << std::endl;
-                }
-                
-                for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
-                    std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
-                }
                 
             }
+
+        }
+
+        void print(void) {
+            
+            for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
+                std::cout << "Node: " << it->first << "\tFunction: " << it->second << std::endl;
+            }
+            
+            for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
+                std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
+            }
+
 
         }
 

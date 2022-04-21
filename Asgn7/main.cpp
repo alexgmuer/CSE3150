@@ -5,6 +5,7 @@
 int main(int argc,char* argv[]) {
    Simulator* s = new Simulator;
    s->read(argv[1]);
+   s->print();
    // std::cout << s << std::endl; 
    
 
