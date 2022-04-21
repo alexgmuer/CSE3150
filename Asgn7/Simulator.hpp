@@ -1,6 +1,6 @@
 #include <fstream>
 #include <iostream>
-#include <stdio.h>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <map>
@@ -59,8 +59,8 @@ class Simulator {
             std::vector<std::string> file_lines;
 
             // Declare delimiters
-            std::string equal_delim = "=";
-            std::string arrow_delim = "->";
+            const char* equal_delim = "=";
+            const char* arrow_delim = "->";
             
             // Check if file is open
             if (filestream.is_open()) {
@@ -92,7 +92,7 @@ class Simulator {
                     std::string temp_str;
 
 
-                    while (std::getline(line_stream, temp_str, equal_delim)) {
+                    while (std::getline(line_stream, temp_str, '=')) {
                         temp_buf.push_back(temp_str);
                     }
 
@@ -112,13 +112,23 @@ class Simulator {
                     std::string temp_str;
 
 
-                    while (std::getline(line_stream, temp_str, equal_delim)) {
+                    while (std::getline(line_stream, temp_str, '>')) {
+                        
                         temp_buf.push_back(temp_str);
                     }
-
+                    
+                    temp_buf[0].resize(temp_buf[0].size() - 1);
+                    
                     connection_lines[temp_buf[0]] = temp_buf[1];
                 }
+
+                for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
+                    std::cout << "Node: " << it->first << "\tFunction:" << it->second << std::endl;
+                }
                 
+                for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
+                    std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
+                }
                 
             }
 
