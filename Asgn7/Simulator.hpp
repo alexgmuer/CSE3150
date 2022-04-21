@@ -10,11 +10,10 @@
 
 class Component {
     public:
-
-    private:
-
-    public:
-
+        std::string name;
+        // Func is temporarily a string
+        std::string func;
+        Component* target;
 };
 
 class Buffer : public Component
@@ -60,43 +59,39 @@ class Router : public Component
 //template <class T>
 class Simulator {
     public:
-        // Will probably need some sort of Node structure
-        class Node {
-            friend class Simulator;
-            //T data;
-            Node* next;
-                // Constructor
-                Node() {
-
-                }
-                
-                // Destructor
-                // Probably not needed
-                //~Node() {
-                    
-                //}
-            
-            // Store whether node is generator, buffer, server, dispatcher
-            // Store the next node it is connected to
-        };
         // Node and connection maps TEMPORARILY PUBLIC
         std::map<std::string, std::string> node_lines;
         std::map<std::string, std::string> connection_lines;
         
+        std::map<std::string, Component> Network_Nodes;
+        
     private:
+        void generate_network(std::map<std::string, std::string> node_lines,
+                              std::map<std::string, std::string> connection_lines) {
+            
+            // Function which takes the nodes and connection maps and generates
+            // network of Component nodes and their targets
+
+            for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
+                // Iterate through node_lines and add node name and func info
+                Component Component_Node;
+                Component_Node.name = it->first;
+                Component_Node.func = it->second;
+
+                Network_Nodes[it->first] = Component_Node;
+            }
+            
+            for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
+                // Iterate through connection_lines and add targets to each node
+                Component* Target_Node = &Network_Nodes[it->second];
+                Network_Nodes[it->first].target = Target_Node;
+            }
+
+
+        }
 
 
     public:
-        // Constructor
-        Simulator() {
-
-        }
-        
-        // Destructor
-        ~Simulator() {
-            
-        }
-
         // Method to read in specification from text file (examples given as test1.txt and test2.txt)
         void read(const char* filename) {
             // Open file as a stream
@@ -172,18 +167,30 @@ class Simulator {
                 
             }
 
+            // Generate network from node and connection maps
+            generate_network(node_lines, connection_lines);
         }
 
 };
 
 std::ostream& operator<<(std::ostream& os, const Simulator* s) {
         
-    for (auto it = s->node_lines.cbegin(); it != s->node_lines.cend(); ++it) {
-        std::cout << "Node: " << it->first << "\tFunction: " << it->second << std::endl;
-    }
+    // Temporary printing functionality 
+    //for (auto it = s->node_lines.cbegin(); it != s->node_lines.cend(); ++it) {
+    //    std::cout << "Node: " << it->first << "\tFunction: " << it->second << std::endl;
+    //}
     
-    for (auto it = s->connection_lines.cbegin(); it != s->connection_lines.cend(); ++it) {
-        std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
+    //for (auto it = s->connection_lines.cbegin(); it != s->connection_lines.cend(); ++it) {
+    //    std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
+    //}
+
+
+    for (auto it = s->Network_Nodes.cbegin(); it != s->Network_Nodes.cend(); ++it) {
+
+        std::cout << it->first         << " --> " 
+                  << it->second.name   << "=" 
+                  << it->second.func   << " target=" 
+                  << it->second.target->name << std::endl;
     }
 
     return os;
