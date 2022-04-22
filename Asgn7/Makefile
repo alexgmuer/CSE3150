@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-g -std=c++14
-DEPS = Simulator.hpp
+DEPS = Simulator.hpp Component.hpp
 OBJ = main.o 
 
 %.o: %.cpp $(DEPS)
