@@ -6,6 +6,9 @@
 #include <map>
 #include <vector>
 
+
+// IDEA: Use dynamic_cast<> to cast Component object down to more 
+// specific Buffer, Generator, Server class
 class Component {
     public:
         std::string name;
@@ -195,22 +198,37 @@ class Simulator {
 
 std::ostream& operator<<(std::ostream& os, const Simulator* s) {
         
-    // Temporary printing functionality 
-    //for (auto it = s->node_lines.cbegin(); it != s->node_lines.cend(); ++it) {
-    //    std::cout << "Node: " << it->first << "\tFunction: " << it->second << std::endl;
-    //}
-    
-    //for (auto it = s->connection_lines.cbegin(); it != s->connection_lines.cend(); ++it) {
-    //    std::cout << "Starting Node: " << it->first << "\tEnding Node:" << it->second << std::endl;
-    //}
-
-
+    // Iterate through Network_Nodes map
     for (auto it = s->Network_Nodes.cbegin(); it != s->Network_Nodes.cend(); ++it) {
 
-        std::cout << it->first         << " --> " 
+        // Check name of Node
+        if (it->second.func == "Dispatch") {
+        std::cout <<
+                     it->first         << " --> " 
                   << it->second.name   << "=" 
-                  << it->second.func   << it->second.func_args << " target=" 
-                  << it->second.target->name << std::endl;
+                  << it->second.func   << "(" << 
+                  it->second.func_args << ")" << 
+                  std::endl;
+            
+        }
+        if (it->second.func == "Exit") {
+        std::cout << 
+                     it->first         << " --> " 
+                  << it->second.name   << "=" 
+                  << it->second.func   << "()" 
+                  << std::endl;
+            
+        }
+        else {
+        std::cout << 
+                     it->first         << " --> " 
+                  << it->second.name   << "=" 
+                  << it->second.func   << "("
+                  << it->second.func_args << ",target=" 
+                  << it->second.target->name << ")" 
+                  << std::endl;
+        }
+
     }
 
     return os;
