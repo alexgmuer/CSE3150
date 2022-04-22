@@ -17,7 +17,8 @@ class Simulator {
         std::map<std::string, std::string> node_lines;
         std::map<std::string, std::string> connection_lines;
         
-        std::map<std::string, Component> Network_Nodes;
+        // Change Component value to a std::any type
+        std::map<std::string, Component*> Network_Nodes;
         
     private:
         // Function to parse out the arguments and function name from RHS of string
@@ -43,54 +44,70 @@ class Simulator {
 
             for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
                 // Iterate through node_lines and add node name and func info
-                Component Component_Node;
-                Component_Node.name = it->first;
+                
+                Component *Component_Node;
+                Component_Node->name = it->first;
                 
                 // parse it->second for func_args. Check if it is empty
                 std::pair<std::string,std::string> func_args = extract_args(it->second);
                 std::string func = func_args.first;
                 std::string args = func_args.second;
 
-                Component_Node.func = func;
-                Component_Node.func_args = args;
+                Component_Node->func = func;
+                Component_Node->func_args = args;
 
                 Network_Nodes[it->first] = Component_Node;
             }
             
             for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
                 // Iterate through connection_lines and add targets to each node
-                Component* Target_Node = &Network_Nodes[it->second];
-                Network_Nodes[it->first].target = Target_Node;
+                // Change to std::any* I guess?
+                Component* Target_Node = Network_Nodes[it->second];
+                Network_Nodes[it->first]->target = Target_Node;
             }
 
 
         }
 
         // Run through map and cast the Component as more specific type based on name
-        void categorize_network(std::map<std::string, Component> Network_Nodes) {
+        void categorize_network(std::map<std::string, Component*> Network_Nodes) {
 
             // Iterate through Network_Nodes map
             for (auto it = Network_Nodes.cbegin(); it != Network_Nodes.cend(); ++it) {
-                if (it->second.func == "FIFO") {
+                if (it->second->func == "FIFO") {
+                    auto buf = reinterpret_cast<FIFO*>(it->second);
 
+                    Network_Nodes[it->first] = buf;
                 }
-                if (it->second.func == "ServerExp") {
-                    
+                if (it->second->func == "ServerExp") {
+                    auto serv = reinterpret_cast<ServerExp*>(it->second);
+
+                    Network_Nodes[it->first] = serv;
                 }
-                if (it->second.func == "ServerNormal") {
-                    
+                if (it->second->func == "ServerNormal") {
+                    auto serv = reinterpret_cast<ServerNormal*>(it->second);
+
+                    Network_Nodes[it->first] = serv;
                 }
-                if (it->second.func == "ServerCst") {
-                    
+                if (it->second->func == "ServerCst") {
+                    auto serv = reinterpret_cast<ServerCst*>(it->second);
+
+                    Network_Nodes[it->first] = serv;
                 }
-                if (it->second.func == "Poisson") {
-                    
+                if (it->second->func == "Poisson") {
+                    auto gen = reinterpret_cast<Poisson*>(it->second);
+
+                    Network_Nodes[it->first] = gen;
                 }
-                if (it->second.func == "Exit") {
-                    
+                if (it->second->func == "Exit") {
+                    auto ex = reinterpret_cast<Exit*>(it->second);
+
+                    Network_Nodes[it->first] = ex;
                 }
-                if (it->second.func == "Dispatch") {
-                    
+                if (it->second->func == "Dispatch") {
+                    auto dis = reinterpret_cast<Dispatch*>(it->second);
+
+                    Network_Nodes[it->first] = dis;
                 }
 
 
@@ -180,40 +197,13 @@ class Simulator {
 
 };
 
+// Use template type for specific component type.
+// All component specific types have a print() method
 std::ostream& operator<<(std::ostream& os, const Simulator* s) {
-        
     // Iterate through Network_Nodes map
     for (auto it = s->Network_Nodes.cbegin(); it != s->Network_Nodes.cend(); ++it) {
-
-        // Check name of Node
-        if (it->second.func == "Dispatch") {
-        std::cout <<
-                     it->first         << " --> " 
-                  << it->second.name   << "=" 
-                  << it->second.func   << "(" << 
-                  it->second.func_args << ")" << 
-                  std::endl;
-            
-        }
-        if (it->second.func == "Exit") {
-        std::cout << 
-                     it->first         << " --> " 
-                  << it->second.name   << "=" 
-                  << it->second.func   << "()" 
-                  << std::endl;
-            
-        }
-        else {
-        std::cout << 
-                     it->first         << " --> " 
-                  << it->second.name   << "=" 
-                  << it->second.func   << "("
-                  << it->second.func_args << ",target=" 
-                  << it->second.target->name << ")" 
-                  << std::endl;
-        }
-
+        // Call print functions of subcomponent classes
+        it->second->print();
     }
-
     return os;
 }

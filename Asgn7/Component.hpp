@@ -1,13 +1,15 @@
+#include <iostream>
 
 // IDEA: Use dynamic_cast<> to cast Component object down to more 
 // specific Buffer, Generator, Server class
 class Component {
     public:
         std::string name;
-        // Func is temporarily a string
         std::string func;
         std::string func_args;
         Component* target;
+
+        virtual void print() = 0;
 };
 
     class Buffer : public Component
@@ -17,6 +19,11 @@ class Component {
         private:
 
         public:
+            void print(void) {
+                std::cout << name << " --> " 
+                << func << "(" << ",target=" << target->name << ")" 
+                << std::endl;
+            }
 
     };
 
@@ -27,9 +34,6 @@ class Component {
             private:
 
             public:
-                void print(void) {
-                    
-                }
 
         };
 
@@ -40,6 +44,11 @@ class Component {
         private:
 
         public:
+            void print(void) {
+                std::cout << name << " --> " 
+                << func << "(" << func_args << ",target=" << target->name << ")" 
+                << std::endl;
+            }
 
     };
     
@@ -50,9 +59,6 @@ class Component {
             private:
 
             public:
-                void print(void) {
-                    
-                }
 
         };
 
@@ -63,6 +69,11 @@ class Component {
         private:
 
         public:
+            void print(void) {
+                std::cout << name << " --> " 
+                << func << "(" << func_args << ",target=" << target->name << ")" 
+                << std::endl;
+            }
 
     };
     
@@ -73,9 +84,6 @@ class Component {
             private:
 
             public:
-                void print(void) {
-                    
-                }
 
         };
         
@@ -86,9 +94,6 @@ class Component {
             private:
 
             public:
-                void print(void) {
-                    
-                }
 
         };
         
@@ -99,9 +104,6 @@ class Component {
             private:
 
             public:
-                void print(void) {
-                    
-                }
 
         };
 
@@ -112,6 +114,11 @@ class Component {
         private:
 
         public:
+            void print(void) {
+                std::cout << name << " --> " 
+                << func << "(" << func_args << ",target=" << target->name << ")" 
+                << std::endl;
+            }
 
     };
 
@@ -122,9 +129,6 @@ class Component {
             private:
 
             public:
-                void print(void) {
-                    
-                }
 
         };
 
@@ -136,7 +140,8 @@ class Component {
 
         public:
             void print(void) {
-                
+                std::cout << name << " --> " 
+                << func << std::endl;
             }
 
     };
