@@ -10,42 +10,133 @@ class Component {
         Component* target;
 };
 
-class Buffer : public Component
-{
-    public:
+    class Buffer : public Component
+    {
+        public:
 
-    private:
+        private:
 
-    public:
+        public:
 
-};
+    };
 
-class Generator : public Component
-{
-    public:
+        class FIFO : public Buffer
+        {
+            public:
 
-    private:
+            private:
 
-    public:
+            public:
+                void print(void) {
+                    
+                }
 
-};
+        };
 
-class Server : public Component
-{
-    public:
+    class Generator : public Component
+    {
+        public:
 
-    private:
+        private:
 
-    public:
+        public:
 
-};
+    };
+    
+        class Poisson : public Generator
+        {
+            public:
 
-class Router : public Component
-{
-    public:
+            private:
 
-    private:
+            public:
+                void print(void) {
+                    
+                }
 
-    public:
+        };
 
-};
+    class Server : public Component
+    {
+        public:
+
+        private:
+
+        public:
+
+    };
+    
+        class ServerCst : public Server
+        {
+            public:
+
+            private:
+
+            public:
+                void print(void) {
+                    
+                }
+
+        };
+        
+        class ServerNormal : public Server
+        {
+            public:
+
+            private:
+
+            public:
+                void print(void) {
+                    
+                }
+
+        };
+        
+        class ServerExp : public Server
+        {
+            public:
+
+            private:
+
+            public:
+                void print(void) {
+                    
+                }
+
+        };
+
+    class Router : public Component
+    {
+        public:
+
+        private:
+
+        public:
+
+    };
+
+        class Dispatch : public Router
+        {
+            public:
+
+            private:
+
+            public:
+                void print(void) {
+                    
+                }
+
+        };
+
+    class Exit : public Component
+    {
+        public:
+
+        private:
+
+        public:
+            void print(void) {
+                
+            }
+
+    };

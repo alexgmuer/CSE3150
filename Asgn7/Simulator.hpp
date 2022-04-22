@@ -20,6 +20,7 @@ class Simulator {
         std::map<std::string, Component> Network_Nodes;
         
     private:
+        // Function to parse out the arguments and function name from RHS of string
         std::pair<std::string,std::string> extract_args(const std::string& func_and_args) {
             auto last = func_and_args.find_last_of(')');
             if (last == std::string::npos) return {};
@@ -65,6 +66,37 @@ class Simulator {
 
         }
 
+        // Run through map and cast the Component as more specific type based on name
+        void categorize_network(std::map<std::string, Component> Network_Nodes) {
+
+            // Iterate through Network_Nodes map
+            for (auto it = Network_Nodes.cbegin(); it != Network_Nodes.cend(); ++it) {
+                if (it->second.func == "FIFO") {
+
+                }
+                if (it->second.func == "ServerExp") {
+                    
+                }
+                if (it->second.func == "ServerNormal") {
+                    
+                }
+                if (it->second.func == "ServerCst") {
+                    
+                }
+                if (it->second.func == "Poisson") {
+                    
+                }
+                if (it->second.func == "Exit") {
+                    
+                }
+                if (it->second.func == "Dispatch") {
+                    
+                }
+
+
+            }
+
+        }
 
     public:
         // Method to read in specification from text file (examples given as test1.txt and test2.txt)
