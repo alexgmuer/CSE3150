@@ -5,14 +5,13 @@
 #include <string>
 #include <map>
 #include <vector>
-// Define data structure inside each node as a class
-// Data structure needs to contain the type 
 
 class Component {
     public:
         std::string name;
         // Func is temporarily a string
         std::string func;
+        std::string func_args;
         Component* target;
 };
 
@@ -66,6 +65,20 @@ class Simulator {
         std::map<std::string, Component> Network_Nodes;
         
     private:
+        std::pair<std::string,std::string> extract_args(const std::string& func_and_args) {
+            auto last = func_and_args.find_last_of(')');
+            if (last == std::string::npos) return {};
+
+            auto args_ind = func_and_args.find_first_of('(');
+            if (args_ind == std::string::npos) return {};
+
+            std::string func = func_and_args.substr(0,args_ind);
+            std::string args = func_and_args.substr(args_ind+1);
+            args.pop_back();
+
+            return {func, args};
+        }
+
         void generate_network(std::map<std::string, std::string> node_lines,
                               std::map<std::string, std::string> connection_lines) {
             
@@ -76,7 +89,14 @@ class Simulator {
                 // Iterate through node_lines and add node name and func info
                 Component Component_Node;
                 Component_Node.name = it->first;
-                Component_Node.func = it->second;
+                
+                // parse it->second for func_args. Check if it is empty
+                std::pair<std::string,std::string> func_args = extract_args(it->second);
+                std::string func = func_args.first;
+                std::string args = func_args.second;
+
+                Component_Node.func = func;
+                Component_Node.func_args = args;
 
                 Network_Nodes[it->first] = Component_Node;
             }
@@ -189,7 +209,7 @@ std::ostream& operator<<(std::ostream& os, const Simulator* s) {
 
         std::cout << it->first         << " --> " 
                   << it->second.name   << "=" 
-                  << it->second.func   << " target=" 
+                  << it->second.func   << it->second.func_args << " target=" 
                   << it->second.target->name << std::endl;
     }
 

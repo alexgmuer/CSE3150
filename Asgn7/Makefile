@@ -1,12 +1,13 @@
-CC=c++
-CFLAGS=-std=c++14 -g 
+CC=g++
+CFLAGS=-g -std=c++14
+DEPS = Simulator.hpp
+OBJ = main.o 
 
-TARGET=main
+%.o: %.cpp $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-all: $(TARGET)
+main: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
 
-$(TARGET): $(TARGET).cpp
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).cpp
- 
 clean:
-	$(RM) -rf *~ $(TARGET) $(TARGET).dSYM
+	@rm -rf *.o *~ main *.dSYM
