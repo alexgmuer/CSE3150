@@ -7,7 +7,7 @@ class Component {
         std::string name;
         std::string func;
         std::string func_args;
-        Component* target;
+        std::shared_ptr<Component> target;
 
         virtual void print() = 0;
 };
