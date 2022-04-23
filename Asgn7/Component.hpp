@@ -1,7 +1,8 @@
 #include <iostream>
+#include <memory>
 
-// IDEA: Use dynamic_cast<> to cast Component object down to more 
-// specific Buffer, Generator, Server class
+
+// General Component Class
 class Component {
     public:
         std::string name;
@@ -20,8 +21,10 @@ class Component {
 
         public:
             void print(void) {
+                std::shared_ptr<Component> temp_target = target;
+
                 std::cout << name << " --> " 
-                << func << "(" << ",target=" << target->name << ")" 
+                << func << "(" << "target=" << temp_target->name << ")" 
                 << std::endl;
             }
 
@@ -45,8 +48,10 @@ class Component {
 
         public:
             void print(void) {
+                std::shared_ptr<Component> temp_target = target;
+
                 std::cout << name << " --> " 
-                << func << "(" << func_args << ",target=" << target->name << ")" 
+                << func << "(" << func_args << ",target=" << temp_target->name << ")" 
                 << std::endl;
             }
 
@@ -70,8 +75,10 @@ class Component {
 
         public:
             void print(void) {
+                std::shared_ptr<Component> temp_target = target;
+
                 std::cout << name << " --> " 
-                << func << "(" << func_args << ",target=" << target->name << ")" 
+                << func << "(" << func_args << ",target=" << temp_target->name << ")" 
                 << std::endl;
             }
 
@@ -106,6 +113,19 @@ class Component {
             public:
 
         };
+        
+        class Exit : public Server
+        {
+            public:
+
+            private:
+
+            public:
+                Exit() {
+                    target = nullptr;
+                }
+
+        };
 
     class Router : public Component
     {
@@ -115,8 +135,10 @@ class Component {
 
         public:
             void print(void) {
+                std::shared_ptr<Component> temp_target = target;
+
                 std::cout << name << " --> " 
-                << func << "(" << func_args << ",target=" << target->name << ")" 
+                << func << "(" << func_args << ",target=" << temp_target->name << ")" 
                 << std::endl;
             }
 
@@ -129,19 +151,8 @@ class Component {
             private:
 
             public:
+                Dispatch() {
+                    target = nullptr;
+                }
 
         };
-
-    class Exit : public Component
-    {
-        public:
-
-        private:
-
-        public:
-            void print(void) {
-                std::cout << name << " --> " 
-                << func << std::endl;
-            }
-
-    };

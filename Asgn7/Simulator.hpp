@@ -50,26 +50,28 @@ class Simulator {
                 
                 cur = *it;
 
-                auto pair = extract_args(cur.second);
-                std::string temp_func = pair.first;
-                std::string temp_args = pair.second;
+                std::string temp_func;
+                std::string temp_args;
+                if (cur.second == "Exit") {
+                    temp_func = "Exit";
+                    temp_args = " ";
+                } else {
+                    auto pair = extract_args(cur.second);
+                    temp_func = pair.first;
+                    temp_args = pair.second;
+                }
 
-                // Move categorize_network() functionality here - determine subclass type based on cur.first
+                // Determine based on func name how to add to Network_Nodes
                 if (temp_func == "FIFO") {
                     
                     Component_Node = std::shared_ptr<Component>(new FIFO);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
                     
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
-
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                 }
@@ -77,17 +79,12 @@ class Simulator {
                     
                     Component_Node = std::shared_ptr<Component>(new ServerExp);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
                     
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
-
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                 }
@@ -95,17 +92,12 @@ class Simulator {
                     
                     Component_Node = std::shared_ptr<Component>(new ServerNormal);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
                     
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
-
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                 }
@@ -113,17 +105,12 @@ class Simulator {
                     
                     Component_Node = std::shared_ptr<Component>(new ServerCst);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
 
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                 }
@@ -131,53 +118,39 @@ class Simulator {
                     
                     Component_Node = std::shared_ptr<Component>(new Poisson);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
 
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                 }
-                if (cur.first == "Exit") {
+                if (temp_func == "Exit") {
                     
                     Component_Node = std::shared_ptr<Component>(new Exit);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
                     
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
-
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
+
                 }
                 if (temp_func == "Dispatch") {
 
                     Component_Node = std::shared_ptr<Component>(new Dispatch);
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
-                    // parse it->second for func_args. Check if it is empty
-                    std::pair<std::string,std::string> func_args = extract_args(cur.second);
-                    std::string func = func_args.first;
-                    std::string args = func_args.second;
 
-                    Component_Node->func = func;
-                    Component_Node->func_args = args;
+                    Component_Node->func = temp_func;
+                    Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                 }
@@ -185,14 +158,20 @@ class Simulator {
                 
             }
             
-            //std::pair<std::string,std::string> temp;
-            for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); ++it) {
+            std::pair<std::string,std::string> temp;
+            std::shared_ptr<Component> Target_Node;
+            for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); it++) {
                 // Iterate through connection_lines and add targets to each node
                 
-                cur = *it;
+                temp = *it;
 
-                std::shared_ptr<Component> Target_Node = Network_Nodes[cur.second];
-                Network_Nodes[cur.first]->target = Target_Node;
+                // THIS IS THE ISSUE: Can't access Target_Node->name when Target_Node is the exit node
+                Target_Node = std::shared_ptr<Component>{std::move(Network_Nodes[temp.second])};
+
+                std::cout << "cur node: " << temp.first << std::endl;
+                std::cout << "target node: " << Target_Node->name << std::endl;
+                
+                Network_Nodes[temp.first]->target = Target_Node;
             }
 
         }
@@ -284,11 +263,11 @@ class Simulator {
 // All component specific types have a print() method
 std::ostream& operator<<(std::ostream& os, const Simulator* s) {
     // Iterate through Network_Nodes map
+    std::pair<std::string,std::shared_ptr<Component>> temp;
     for (auto it = s->Network_Nodes.cbegin(); it != s->Network_Nodes.cend(); ++it) {
         // Call print functions of subcomponent classes
-        std::pair<std::string,std::shared_ptr<Component>> temp = *it;
-
-        // Cast for printing
+        temp = *it;
+        // SEGFAULT occuring when trying to read the target->name of the node before the Exit node
         temp.second->print();
     }
     return os;
