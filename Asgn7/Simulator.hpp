@@ -66,93 +66,78 @@ class Simulator {
                     
                     Component_Node = std::shared_ptr<Component>(new FIFO);
 
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
                 if (temp_func == "ServerExp") {
                     
                     Component_Node = std::shared_ptr<Component>(new ServerExp);
 
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
                 if (temp_func == "ServerNormal") {
                     
                     Component_Node = std::shared_ptr<Component>(new ServerNormal);
 
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
                 if (temp_func == "ServerCst") {
                     
                     Component_Node = std::shared_ptr<Component>(new ServerCst);
-
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
                 if (temp_func == "Poisson") {
                     
                     Component_Node = std::shared_ptr<Component>(new Poisson);
 
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
                 if (temp_func == "Exit") {
                     
                     Component_Node = std::shared_ptr<Component>(new Exit);
 
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-                    
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
-                    Network_Nodes[cur.first] = Component_Node;
-
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
                 if (temp_func == "Dispatch") {
 
                     Component_Node = std::shared_ptr<Component>(new Dispatch);
 
-                    //Network_Nodes[cur.first] = Component_Node;
                     
                     Component_Node->name = cur.first;
-
                     Component_Node->func = temp_func;
                     Component_Node->func_args = temp_args;
 
-                    Network_Nodes[cur.first] = Component_Node;
+                    Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
 
                 
