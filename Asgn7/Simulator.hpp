@@ -43,12 +43,11 @@ class Simulator {
             // network of Component nodes and their targets
             
             std::pair<std::string,std::string> cur;
-            std::shared_ptr<Component> Component_Node;
 
-            for (auto it = node_lines.cbegin(); it != node_lines.cend(); ++it) {
+            for (auto it_node = node_lines.cbegin(); it_node != node_lines.cend(); ++it_node) {
                 // Iterate through node_lines and add node name and func info
                 
-                cur = *it;
+                cur = *it_node;
 
                 std::string temp_func;
                 std::string temp_args;
@@ -64,6 +63,7 @@ class Simulator {
                 // Determine based on func name how to add to Network_Nodes
                 if (temp_func == "FIFO") {
                     
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new FIFO);
 
                     
@@ -75,6 +75,7 @@ class Simulator {
                 }
                 if (temp_func == "ServerExp") {
                     
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new ServerExp);
 
                     
@@ -86,6 +87,7 @@ class Simulator {
                 }
                 if (temp_func == "ServerNormal") {
                     
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new ServerNormal);
 
                     
@@ -98,6 +100,7 @@ class Simulator {
                 }
                 if (temp_func == "ServerCst") {
                     
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new ServerCst);
                     
                     Component_Node->name = cur.first;
@@ -108,6 +111,7 @@ class Simulator {
                 }
                 if (temp_func == "Poisson") {
                     
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new Poisson);
 
                     
@@ -119,6 +123,7 @@ class Simulator {
                 }
                 if (temp_func == "Exit") {
                     
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new Exit);
 
                     
@@ -130,6 +135,7 @@ class Simulator {
                 }
                 if (temp_func == "Dispatch") {
 
+                    std::shared_ptr<Component> Component_Node;
                     Component_Node = std::shared_ptr<Component>(new Dispatch);
 
                     
@@ -145,17 +151,14 @@ class Simulator {
             
             std::pair<std::string,std::string> temp;
             std::shared_ptr<Component> Target_Node;
-            for (auto it = connection_lines.cbegin(); it != connection_lines.cend(); it++) {
+            for (auto it_con = connection_lines.cbegin(); it_con != connection_lines.cend(); ++it_con) {
                 // Iterate through connection_lines and add targets to each node
                 
-                temp = *it;
+                temp = *it_con;
 
                 // THIS IS THE ISSUE: Can't access Target_Node->name when Target_Node is the exit node
-                Target_Node = std::shared_ptr<Component>{std::move(Network_Nodes[temp.second])};
+                Target_Node = Network_Nodes[temp.second];
 
-                std::cout << "cur node: " << temp.first << std::endl;
-                std::cout << "target node: " << Target_Node->name << std::endl;
-                
                 Network_Nodes[temp.first]->target = Target_Node;
             }
 

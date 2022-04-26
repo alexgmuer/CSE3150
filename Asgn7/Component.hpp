@@ -5,7 +5,7 @@
 // General Component Class
 class Component {
     public:
-        std::string name;
+        /*const*/ std::string name;
         std::string func;
         std::string func_args;
         std::shared_ptr<Component> target;
@@ -91,6 +91,13 @@ class Component {
             private:
 
             public:
+                void print(void) {
+                    std::shared_ptr<Component> temp_target = target;
+
+                    std::cout << name << " --> " 
+                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << std::endl;
+                }
 
         };
         
@@ -101,6 +108,13 @@ class Component {
             private:
 
             public:
+                void print(void) {
+                    std::shared_ptr<Component> temp_target = target;
+
+                    std::cout << name << " --> " 
+                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << std::endl;
+                }
 
         };
         
@@ -111,6 +125,13 @@ class Component {
             private:
 
             public:
+                void print(void) {
+                    std::shared_ptr<Component> temp_target = target;
+
+                    std::cout << name << " --> " 
+                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << std::endl;
+                }
 
         };
         
@@ -121,8 +142,12 @@ class Component {
             private:
 
             public:
-                Exit() {
-                    target = nullptr;
+                void print(void) {
+                    std::shared_ptr<Component> temp_target = target;
+
+                    std::cout << name << " --> " 
+                    << "ServerExit" << "()" 
+                    << std::endl;
                 }
 
         };
@@ -134,13 +159,6 @@ class Component {
         private:
 
         public:
-            void print(void) {
-                std::shared_ptr<Component> temp_target = target;
-
-                std::cout << name << " --> " 
-                << func << "(" << func_args << ",target=" << temp_target->name << ")" 
-                << std::endl;
-            }
 
     };
 
@@ -151,8 +169,12 @@ class Component {
             private:
 
             public:
-                Dispatch() {
-                    target = nullptr;
+                void print(void) {
+                    std::shared_ptr<Component> temp_target = target;
+
+                    std::cout << name << " --> " 
+                    << func << "(" << func_args << ")" 
+                    << std::endl;
                 }
 
         };
