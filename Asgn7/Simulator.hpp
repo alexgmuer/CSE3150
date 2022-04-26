@@ -254,7 +254,6 @@ std::ostream& operator<<(std::ostream& os, const Simulator* s) {
     for (auto it = s->Network_Nodes.cbegin(); it != s->Network_Nodes.cend(); ++it) {
         // Call print functions of subcomponent classes
         temp = *it;
-        // SEGFAULT occuring when trying to read the target->name of the node before the Exit node
         temp.second->print();
     }
     return os;

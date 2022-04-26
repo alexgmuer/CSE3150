@@ -5,11 +5,47 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(lldb) Launch",
+            "name": "(lldb) model.q Test",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/main",
             "args": ["${fileDirname}/tests/model.q"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) model2.q Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/main",
+            "args": ["${fileDirname}/tests/model2.q"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) test1.txt Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/main",
+            "args": ["${fileDirname}/tests/test1.txt"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
+            "name": "(lldb) test2.txt Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/main",
+            "args": ["${fileDirname}/tests/test2.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

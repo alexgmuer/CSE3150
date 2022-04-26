@@ -25,9 +25,16 @@ class Component {
             void print(void) {
                 std::shared_ptr<Component> temp_target = target;
 
-                std::cout << name << " --> " 
-                << func << "(" << "target=" << temp_target->name << ")" 
-                << std::endl;
+/*                 if (temp_target == nullptr) {
+
+                    std::cout << func << " " << name << " has no target. Exiting" << std::endl;
+                    exit(0);
+                }
+                else { */
+                    std::cout << name << " --> " 
+                    << func << "(" << "target=" << temp_target->name << ")" 
+                    << std::endl;
+                //}
             }
 
     };
@@ -53,10 +60,17 @@ class Component {
             // code outputs error message instead of crashing/segfaulting
             void print(void) {
                 std::shared_ptr<Component> temp_target = target;
+                
+/*                 if (temp_target == nullptr) {
+                    std::cout << func << " " << name << " has no target. Exiting" << std::endl;
+                    exit(1);
+                }
+                else { */
+                    std::cout << name << " --> " 
+                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << std::endl;
+                //}
 
-                std::cout << name << " --> " 
-                << func << "(" << func_args << ",target=" << temp_target->name << ")" 
-                << std::endl;
             }
 
     };
@@ -78,14 +92,20 @@ class Component {
         private:
 
         public:
-            // Add error checking so that if invalid input file is made, 
-            // code outputs error message instead of crashing/segfaulting
             void print(void) {
                 std::shared_ptr<Component> temp_target = target;
 
-                std::cout << name << " --> " 
-                << func << "(" << func_args << ",target=" << temp_target->name << ")" 
-                << std::endl;
+/*                 if (temp_target == nullptr) {
+
+                    std::cout << "Server " << name << " has no target. Exiting" << std::endl;
+                    exit(1);
+                }
+                else { */
+                    std::cout << name << " --> " 
+                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << std::endl;
+                //}
+
             }
 
     };
@@ -97,15 +117,6 @@ class Component {
             private:
 
             public:
-                // Add error checking so that if invalid input file is made, 
-                // code outputs error message instead of crashing/segfaulting
-                void print(void) {
-                    std::shared_ptr<Component> temp_target = target;
-
-                    std::cout << name << " --> " 
-                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
-                    << std::endl;
-                }
 
         };
         
@@ -116,15 +127,6 @@ class Component {
             private:
 
             public:
-                // Add error checking so that if invalid input file is made, 
-                // code outputs error message instead of crashing/segfaulting
-                void print(void) {
-                    std::shared_ptr<Component> temp_target = target;
-
-                    std::cout << name << " --> " 
-                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
-                    << std::endl;
-                }
 
         };
         
@@ -135,36 +137,24 @@ class Component {
             private:
 
             public:
-                // Add error checking so that if invalid input file is made, 
-                // code outputs error message instead of crashing/segfaulting
-                void print(void) {
-                    std::shared_ptr<Component> temp_target = target;
-
-                    std::cout << name << " --> " 
-                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
-                    << std::endl;
-                }
 
         };
         
-        class Exit : public Server
-        {
-            public:
+    class Exit : public Component
+    {
+        public:
 
-            private:
+        private:
 
-            public:
-                // Add error checking so that if invalid input file is made, 
-                // code outputs error message instead of crashing/segfaulting
-                void print(void) {
-                    std::shared_ptr<Component> temp_target = target;
+        public:
+            void print(void) {
 
-                    std::cout << name << " --> " 
-                    << "ServerExit" << "()" 
-                    << std::endl;
-                }
+                std::cout << name << " --> " 
+                << "ServerExit" << "()" 
+                << std::endl;
+            }
 
-        };
+    };
 
     class Router : public Component
     {
@@ -183,10 +173,7 @@ class Component {
             private:
 
             public:
-                // Add error checking so that if invalid input file is made, 
-                // code outputs error message instead of crashing/segfaulting
                 void print(void) {
-                    std::shared_ptr<Component> temp_target = target;
 
                     std::cout << name << " --> " 
                     << func << "(" << func_args << ")" 
