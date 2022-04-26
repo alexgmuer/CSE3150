@@ -20,6 +20,8 @@ class Component {
         private:
 
         public:
+            // Add error checking so that if invalid input file is made, 
+            // code outputs error message instead of crashing/segfaulting
             void print(void) {
                 std::shared_ptr<Component> temp_target = target;
 
@@ -47,6 +49,8 @@ class Component {
         private:
 
         public:
+            // Add error checking so that if invalid input file is made, 
+            // code outputs error message instead of crashing/segfaulting
             void print(void) {
                 std::shared_ptr<Component> temp_target = target;
 
@@ -74,6 +78,8 @@ class Component {
         private:
 
         public:
+            // Add error checking so that if invalid input file is made, 
+            // code outputs error message instead of crashing/segfaulting
             void print(void) {
                 std::shared_ptr<Component> temp_target = target;
 
@@ -91,6 +97,8 @@ class Component {
             private:
 
             public:
+                // Add error checking so that if invalid input file is made, 
+                // code outputs error message instead of crashing/segfaulting
                 void print(void) {
                     std::shared_ptr<Component> temp_target = target;
 
@@ -108,6 +116,8 @@ class Component {
             private:
 
             public:
+                // Add error checking so that if invalid input file is made, 
+                // code outputs error message instead of crashing/segfaulting
                 void print(void) {
                     std::shared_ptr<Component> temp_target = target;
 
@@ -125,6 +135,8 @@ class Component {
             private:
 
             public:
+                // Add error checking so that if invalid input file is made, 
+                // code outputs error message instead of crashing/segfaulting
                 void print(void) {
                     std::shared_ptr<Component> temp_target = target;
 
@@ -142,6 +154,8 @@ class Component {
             private:
 
             public:
+                // Add error checking so that if invalid input file is made, 
+                // code outputs error message instead of crashing/segfaulting
                 void print(void) {
                     std::shared_ptr<Component> temp_target = target;
 
@@ -169,6 +183,8 @@ class Component {
             private:
 
             public:
+                // Add error checking so that if invalid input file is made, 
+                // code outputs error message instead of crashing/segfaulting
                 void print(void) {
                     std::shared_ptr<Component> temp_target = target;
 

@@ -156,7 +156,6 @@ class Simulator {
                 
                 temp = *it_con;
 
-                // THIS IS THE ISSUE: Can't access Target_Node->name when Target_Node is the exit node
                 Target_Node = Network_Nodes[temp.second];
 
                 Network_Nodes[temp.first]->target = Target_Node;
