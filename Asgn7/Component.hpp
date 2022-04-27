@@ -7,7 +7,7 @@ class Component {
     public:
         /*const*/ std::string name;
         std::string func;
-        std::string func_args;
+        std::string func_args_str;
         std::shared_ptr<Component> target;
 
         virtual void print() = 0;
@@ -67,7 +67,7 @@ class Component {
                 }
                 else { */
                     std::cout << name << " --> " 
-                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << func << "(" << func_args_str << ",target=" << temp_target->name << ")" 
                     << std::endl;
                 //}
 
@@ -102,7 +102,7 @@ class Component {
                 }
                 else { */
                     std::cout << name << " --> " 
-                    << func << "(" << func_args << ",target=" << temp_target->name << ")" 
+                    << func << "(" << func_args_str << ",target=" << temp_target->name << ")" 
                     << std::endl;
                 //}
 
@@ -176,7 +176,7 @@ class Component {
                 void print(void) {
 
                     std::cout << name << " --> " 
-                    << func << "(" << func_args << ")" 
+                    << func << "(" << func_args_str << ")" 
                     << std::endl;
                 }
 

@@ -69,7 +69,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
@@ -81,7 +81,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
@@ -93,7 +93,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes[cur.first] = Component_Node;
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
@@ -105,7 +105,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
@@ -117,7 +117,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
@@ -129,7 +129,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
@@ -141,7 +141,7 @@ class Simulator {
                     
                     Component_Node->name = cur.first;
                     Component_Node->func = temp_func;
-                    Component_Node->func_args = temp_args;
+                    Component_Node->func_args_str = temp_args;
 
                     Network_Nodes.insert(std::make_pair(cur.first, Component_Node));
                 }
