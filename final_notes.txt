@@ -1,0 +1,42 @@
+encapsulation - bundling data and operations that go together into a package
+	- structures/classes
+		- structures: things are public, no default constructors
+		- class: things are private, default constructors
+
+inheritance - lets classes know things about their parent class
+	- minimize inheritance used
+
+force dynamic binding (calling print and getting human print instead of mammal print) by using 
+public inheritance
+
+public inheritance also needed for polymorphism at runtime
+
+copy constructor takes in const reference to same object
+move constructor takes in double reference to same object
+	- move constructors delete built-in copy constructors
+	- takes in r-value
+
+r-value - something in memory that doesn't have a variable name assiociated to it
+	- like when a function returns an object. that object is stored in special memory in stack
+	- that's why need move function for it
+
+shallow copy - may copy pointer to the same array as the thing it copies from. want a second array instead
+
+template classes have to be defined in header
+
+method being virtual changes from static to dynamic binding
+
+coupling and cohesion
+	- want high cohesion (things in modules are related)
+	- low coupling (few connections between modules)
+
+abstract class
+	- has at least one fully virtual function
+
+overload parenthesis
+	- 
+	
+closures/lambdas
+
+spiral rule
+
