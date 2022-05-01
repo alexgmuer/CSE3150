@@ -83,3 +83,12 @@ int main()
     return 0;
 }
 ```
+
+# Abstract Classes
+Abstract classes are designed to be specifically used as base classes, and contains
+at least one pure virtual function. A function is declared as purely virtual by using 
+a pure specifier (= 0) as shown below:
+```cpp
+class Base:
+    virtual void print() = 0;   // Purely virtual print function
+```
