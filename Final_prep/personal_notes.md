@@ -1,4 +1,4 @@
-### Class Access Specifiers
+# Class Access Specifiers
 ## Public
     Public data members are accessible to anyone, inside or outside of the class.
 ## Protected
@@ -7,14 +7,14 @@
     Private data members are only accessible within a class.
 
 
-### Inheritance
+# Inheritance
     Inheritance
 
 
-### Encapsulation
+# Encapsulation
     Encapsulation is a design rule that groups similar data together either within classes or as a general rule.
 
-### Polymorphism
+# Polymorphism
     When the same entity behaves differently in different scenarios. For example, C++ allows for operators to be overloaded to act differently for different classes and objects.
 
 ## Runtime Polymorphism
