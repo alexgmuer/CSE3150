@@ -38,7 +38,7 @@
     class until runtime, and thus the class object pointer can be reassigned.
 
     Example:
-    ```cpp
+    ~~~cpp
     #include<iostream>
     using namespace std;
     
@@ -82,4 +82,4 @@
     
         return 0;
     }
-    ```
+    ~~~
