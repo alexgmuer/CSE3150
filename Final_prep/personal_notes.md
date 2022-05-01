@@ -8,7 +8,10 @@
 
 
 # Inheritance
-    Inheritance
+    Inheritance is when a class can inherit the data members of another class. 
+    This can be done via public, protected, or private inheritance, however public 
+    inheritance allows for runtime polymorphism and is thus preferred as the compiler 
+    can optimize code generation.
 
 
 # Encapsulation
