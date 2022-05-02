@@ -1,6 +1,8 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <map>
+#include <memory>
 
 // Write in a class in order to read in from the personal_notes.md file,
 // partition the sections into a class hierarchy, overload the >> operator
@@ -17,9 +19,12 @@ class Wiki {
     int numSections_Total{};
     int numSubsections_Total{};
     int numSubsubsections_Total{};
-        
+
     // Name of wiki
     std::string name{};
+
+    // Need array of pointers to Section subclass
+    std::map<std::string, std::shared_ptr<Section>> sections_map;
 
     private:
 
@@ -81,6 +86,9 @@ class Section : public Wiki {
         // Vector of strings which represents the lines of text in each text body 
         std::vector<std::string> text_body{};
         
+        // Map to subsections
+        std::map<std::string, std::shared_ptr<Subsection>> subsections_map;
+
         // Name of section
         std::string name{};
     
@@ -108,6 +116,12 @@ class Subsection : public Section {
         // Number of subsubsections
         int numSubsubsections;
         
+        // Vector of strings which represents the lines of text in each text body 
+        std::vector<std::string> text_body{};
+        
+        // Subsubsections map
+        std::map<std::string, std::shared_ptr<Subsubsection>> subsubsections_map;
+
         // Name of subsection
         std::string name;
     private:
@@ -124,6 +138,10 @@ class Subsubsection : public Subsection {
     public:
         // Name of subsubsection
         std::string name;
+
+        // Vector of strings which represents the lines of text in each text body 
+        std::vector<std::string> text_body{};
+
     
     private:
 
@@ -131,6 +149,7 @@ class Subsubsection : public Subsection {
     Subsubsection(std::string subsubsection_name = "Default_Subsubsection_Name") :
         name{subsubsection_name}
     {}
+
 };
 
 std::ostream& operator<<(std::ostream& os, const Wiki* wiki) {
