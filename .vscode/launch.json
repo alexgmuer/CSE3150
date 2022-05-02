@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(lldb) Wiki Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/test",
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        {
             "name": "(lldb) model.q Test",
             "type": "cppdbg",
             "request": "launch",
