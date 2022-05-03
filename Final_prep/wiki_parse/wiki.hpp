@@ -56,9 +56,9 @@ class Wiki {
             // Check the first couple characters of each line. It will either start with
             // '# ', '## ', '### ', or some other text. 
 
-            std::string hash_4char = filelines[i].substr(0,3);
-            std::string hash_3char = filelines[i].substr(0,2);
-            std::string hash_2char = filelines[i].substr(0,1);
+            std::string hash_4char = filelines[i].substr(0,4);
+            std::string hash_3char = filelines[i].substr(0,3);
+            std::string hash_2char = filelines[i].substr(0,2);
 
             if (hash_4char == "### ") {
                 // Add to Subsubsection
@@ -115,8 +115,8 @@ std::ostream& operator<<(std::ostream& os, const Wiki* wiki) {
     std::pair<std::string,std::shared_ptr<Section>> temp_sec;
 
 
-    for (auto it : wiki->sections_map) {
-        temp_sec = it;
+    for (auto it = wiki->sections_map.cbegin(); it != wiki->sections_map.cend(); ++it) {
+        temp_sec = *it;
 
         std::cout << "Section: " << temp_sec.second->name << std::endl;
     }
